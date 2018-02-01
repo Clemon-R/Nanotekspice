@@ -6,6 +6,7 @@
 ##
 
 SRC_CPP	=	$(addprefix src/,	\
+		Exception.cpp	\
 		main.cpp	\
 		)
 
@@ -16,6 +17,7 @@ SRC_CPP	+=	$(addprefix src/component/,	\
 SRC_HPP	=	$(addprefix include/,	\
 		IComponent.hpp	\
 		ManagerComponent.hpp	\
+		Exception.hpp		\
 		)
 
 SRC	=	$(SRC_CPP)	\
