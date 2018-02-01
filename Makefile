@@ -12,12 +12,21 @@ SRC_CPP	=	$(addprefix src/,	\
 
 SRC_CPP	+=	$(addprefix src/component/,	\
 		ManagerComponent.cpp	\
+		Input.cpp	\
+		Output.cpp	\
+		)
+
+SRC_CPP	+=	$(addprefix src/parser/,	\
+		Parser.cpp	\
 		)
 
 SRC_HPP	=	$(addprefix include/,	\
 		IComponent.hpp	\
 		ManagerComponent.hpp	\
 		Exception.hpp		\
+		Parser.hpp		\
+		component/Input.hpp	\
+		component/Output.hpp	\
 		)
 
 SRC	=	$(SRC_CPP)	\
@@ -25,7 +34,7 @@ SRC	=	$(SRC_CPP)	\
 
 OBJ	=	$(SRC:.cpp=.o)
 
-CXXFLAGS	=	-W -Wall -Wextra -std=c++14
+CXXFLAGS	=	-W -Wall -Wextra -std=c++14 -g3
 
 CXXFLAGS	+=	-Iinclude
 
@@ -38,7 +47,7 @@ NAME	=	a.out
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CXX) $(OBJ) -o $(NAME) $(CXXFLAGS)
+	@$(CXX) $(OBJ) -o $(NAME) $(CXXFLAGS)
 
 clean:
 	$(RM) -f $(SRC_CPP:.cpp=.o)

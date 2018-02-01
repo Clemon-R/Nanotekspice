@@ -20,6 +20,8 @@ namespace nts
 	public:
 		static std::unique_ptr<IComponent>	createComponent(const std::string &, const std::string &);
 	private:
+		static std::unique_ptr<IComponent>	createInput(const std::string &);
+		static std::unique_ptr<IComponent>	createOutput(const std::string &);
 		static std::unique_ptr<IComponent>	create4001(const std::string &);
 		static std::unique_ptr<IComponent>      create4008(const std::string &);
 		static std::unique_ptr<IComponent>      create4011(const std::string &);

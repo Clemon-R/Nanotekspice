@@ -7,12 +7,17 @@
 
 #include <map>
 #include "ManagerComponent.hpp"
+#include "component/Input.hpp"
+#include "component/Output.hpp"
+
 namespace nts
 {
 	std::unique_ptr<IComponent>	ManagerComponent::createComponent(const std::string &type, const std::string &value)
 	{
 		std::map<std::string, functionComponent>	listComponent;
 
+		listComponent["input"] = createInput;
+		listComponent["output"] = createOutput;
 		listComponent["4001"] = create4001;
 		listComponent["4008"] = create4008;
 		listComponent["4011"] = create4011;
@@ -99,5 +104,27 @@ namespace nts
 	std::unique_ptr<IComponent>     ManagerComponent::create2716(const std::string &value)
 	{
 		return (nullptr);
+	}
+
+	std::unique_ptr<IComponent>     ManagerComponent::createInput(const std::string &value)
+	{
+		nts::Tristate	state = nts::Tristate::UNDEFINED;
+		
+		if (value == "1")
+			state = nts::Tristate::TRUE;
+		else if (value == "0")
+			state = nts::Tristate::FALSE;
+		return (std::make_unique<Input>(state));
+	}
+
+	std::unique_ptr<IComponent>     ManagerComponent::createOutput(const std::string &value)
+	{
+		nts::Tristate   state = nts::Tristate::UNDEFINED;
+
+		if (value == "1")
+			state = nts::Tristate::TRUE;
+		else if (value == "0")
+			state = nts::Tristate::FALSE;
+		return (std::make_unique<Output>(state));		
 	}	
 }
