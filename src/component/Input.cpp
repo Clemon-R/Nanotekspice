@@ -7,20 +7,24 @@
 
 #include <iostream>
 #include "component/Input.hpp"
+#include "Exception.hpp"
 
 namespace nts
 {
 	Input::Input(nts::Tristate state) : _state(state)
 	{
-		std::cout << "Input was created\n";
 	}
 	
-	nts::Tristate	Input::compute(std::size_t)
+	nts::Tristate	Input::compute(std::size_t pin)
 	{
+		if (pin != 1)
+			throw Exception("Pin not found");
+		return (_state);
 	}
 
 	void	Input::setLink(std::size_t, nts::IComponent &, std::size_t)
 	{
+		throw Exception("Impossible to set a link on input");
 	}
 
 	void	Input::dump() const

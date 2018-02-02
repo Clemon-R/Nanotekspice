@@ -14,12 +14,15 @@ namespace nts
 	{
 	}
 	
-	nts::Tristate	Output::compute(std::size_t)
+	nts::Tristate	Output::compute(std::size_t pin)
 	{
+		_state = _link[pin].compute();
+		dump();
 	}
 
-	void	Output::setLink(std::size_t, nts::IComponent &, std::size_t)
+	void	Output::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 	{
+		_link[pin] = other;
 	}
 
 	void	Output::dump() const
