@@ -1,5 +1,5 @@
 .chipsets:
-input a(1)
+input a(0)
 input b(0)
 output out
 4001 nor

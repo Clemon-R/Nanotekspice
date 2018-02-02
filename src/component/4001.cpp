@@ -24,11 +24,11 @@ namespace nts
 
 		state1 = std::get<0>(comp1)->compute(std::get<1>(comp1));
 		state2 = std::get<0>(comp2)->compute(std::get<1>(comp2));
-		if (state1 == nts::Tristate::TRUE && state2 == nts::Tristate::TRUE)
-			return (nts::Tristate::TRUE);
-		else if (state1 == nts::Tristate::TRUE && state2 == nts::Tristate::TRUE)
+		if (state1 == nts::Tristate::TRUE || state2 == nts::Tristate::TRUE)
 			return (nts::Tristate::FALSE);
-		return (nts::Tristate::UNDEFINED);
+		else if (state1 == nts::Tristate::UNDEFINED || state2 == nts::Tristate::UNDEFINED)
+			return (nts::Tristate::FALSE);
+		return (nts::Tristate::TRUE);
 	}
 	
 	nts::Tristate	component4001::compute(std::size_t pin)
@@ -62,6 +62,7 @@ namespace nts
 		if (pin < 1 || pin > 14)
 			throw Exception("Pin not found");
 		_link[pin] = std::make_tuple(&other, otherPin);
+		other.compute(otherPin);
 	}
 
 	void	component4001::dump() const

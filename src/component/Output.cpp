@@ -25,6 +25,7 @@ namespace nts
 	void	Output::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 	{
 		_link[pin] = std::make_tuple(&other, otherPin);
+		compute(pin);
 	}
 
 	void	Output::dump() const
