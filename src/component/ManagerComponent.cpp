@@ -9,6 +9,7 @@
 #include "ManagerComponent.hpp"
 #include "component/Input.hpp"
 #include "component/Output.hpp"
+#include "component/4001.hpp"
 
 namespace nts
 {
@@ -38,7 +39,13 @@ namespace nts
 
 	std::unique_ptr<IComponent>	ManagerComponent::create4001(const std::string &value)
 	{
-		return (nullptr);
+		nts::Tristate   state = nts::Tristate::UNDEFINED;
+
+		if (value == "1")
+			state = nts::Tristate::TRUE;
+		else if (value == "0")
+			state = nts::Tristate::FALSE;		
+		return (std::make_unique<component4001>(state));
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4008(const std::string &value)

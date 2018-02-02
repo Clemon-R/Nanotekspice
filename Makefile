@@ -14,6 +14,7 @@ SRC_CPP	+=	$(addprefix src/component/,	\
 		ManagerComponent.cpp	\
 		Input.cpp	\
 		Output.cpp	\
+		4001.cpp	\
 		)
 
 SRC_CPP	+=	$(addprefix src/parser/,	\
@@ -27,6 +28,7 @@ SRC_HPP	=	$(addprefix include/,	\
 		Parser.hpp		\
 		component/Input.hpp	\
 		component/Output.hpp	\
+		component/4001.hpp	\
 		)
 
 SRC	=	$(SRC_CPP)	\
