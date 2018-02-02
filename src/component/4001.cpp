@@ -51,6 +51,8 @@ namespace nts
 			throw Exception("Error compute wrong pin");
 			break;
 		}
+		if (_link.find(pin + 2 * offset) == _link.end() || _link.find(pin + offset) == _link.end())
+			throw Exception("Pin not found");
 		comp1 = _link[pin + 2 * offset];
 		comp2 = _link[pin + offset];
 		_state = getState(comp1, comp2);
@@ -62,7 +64,6 @@ namespace nts
 		if (pin < 1 || pin > 14)
 			throw Exception("Pin not found");
 		_link[pin] = std::make_tuple(&other, otherPin);
-		other.compute(otherPin);
 	}
 
 	void	component4001::dump() const

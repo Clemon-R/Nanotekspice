@@ -23,7 +23,7 @@ namespace nts
 		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
 		void	dump() const override;
 	private:
-		std::map<std::size_t, std::tuple<nts::IComponent *, std::size_t>>	_link;
+		std::tuple<nts::IComponent *, std::size_t>	_link;
 		nts::Tristate	_state;
 	};
 }

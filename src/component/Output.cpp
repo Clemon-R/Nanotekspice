@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include "Exception.hpp"
 #include "Parser.hpp"
 #include "component/Output.hpp"
 
@@ -17,15 +18,22 @@ namespace nts
 	
 	nts::Tristate	Output::compute(std::size_t pin)
 	{
-		_state = std::get<0>(_link[pin])->compute(std::get<1>(_link[pin]));
+		if (pin != 1)
+			throw Exception("Error pin not found");
+		try{
+			_state = std::get<0>(_link)->compute(std::get<1>(_link));
+		}catch (std::exception &error){
+			throw Exception("Error pin not found");
+		}
 		dump();
 		return (_state);
 	}
 
 	void	Output::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 	{
-		_link[pin] = std::make_tuple(&other, otherPin);
-		compute(pin);
+		if (pin != 1)
+			throw Exception("Error pin not found");
+		_link = std::make_tuple(&other, otherPin);
 	}
 
 	void	Output::dump() const
