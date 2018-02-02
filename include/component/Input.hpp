@@ -5,9 +5,10 @@
 // 
 //
 
-#pragma once
+#ifndef INPUT_HPP_
+# define INPUT_HPP_
 
-#include "IComponent.hpp"
+# include "IComponent.hpp"
 
 namespace nts
 {
@@ -22,3 +23,4 @@ namespace nts
 		nts::Tristate	_state;
 	};
 }
+#endif

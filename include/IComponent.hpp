@@ -5,8 +5,10 @@
 // 
 //
 
-#pragma once
-#include <iostream>
+#ifndef ICOMPONENT_HPP_
+# define ICOMPONENT_HPP_
+
+# include <iostream>
 
 namespace nts
 {
@@ -25,3 +27,4 @@ namespace nts
 		virtual void	dump() const = 0;
 	};
 }
+#endif

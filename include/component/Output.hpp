@@ -5,11 +5,12 @@
 // 
 //
 
-#pragma once
+#ifndef OUTPUT_HPP_
+# define OUTPUT_HPP_
 
-#include "IComponent.hpp"
-#include <iostream>
-#include <map>
+# include "IComponent.hpp"
+# include <iostream>
+# include <map>
 
 namespace nts
 {
@@ -21,7 +22,8 @@ namespace nts
 		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
 		void	dump() const override;
 	private:
-		std::map<std::size_t, nts::IComponent &>	_link;
+		std::map<std::size_t, nts::IComponent *>	_link;
 		nts::Tristate	_state;
 	};
 }
+#endif

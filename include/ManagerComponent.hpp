@@ -5,11 +5,12 @@
 // 
 //
 
-#pragma once
+#ifndef MANAGERCOMPONENT_HPP_
+# define MANAGERCOMPONENT_HPP_
 
-#include <memory>
-#include <functional>
-#include "IComponent.hpp"
+# include <memory>
+# include <functional>
+# include "IComponent.hpp"
 
 using	functionComponent = std::function<std::unique_ptr<nts::IComponent> (const std::string &)>;
 
@@ -38,3 +39,4 @@ namespace nts
 		static std::unique_ptr<IComponent>      create2716(const std::string &);
 	};
 }
+#endif
