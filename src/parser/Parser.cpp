@@ -37,8 +37,8 @@ void	Parser::checkSettings()
 
 nts::IComponent	&Parser::getComponentByName(const std::string &name)
 {
-        if (_list.find(name) == _list.end())
-		throw Exception("Parser: component not found");
+        if (_list.find(name) == _list.end() || _list[name] == nullptr)
+		throw Exception("Parser - " + name + ": component not found");
 	return (*_list[name]);
 }
 
@@ -91,6 +91,8 @@ void	Parser::parseChipsets(const std::string &line)
 	}
 	if (name == "")
 		throw Exception("Parser: name not found");
+	else if (_list.find(name) != _list.end())
+		throw Exception("Parser - " + name + ": double usage of this name");
 	_list[name] = nts::ManagerComponent::createComponent(type, value);
 	_components.push_back(&(*_list[name]));
 	if (type == "output")
@@ -121,7 +123,7 @@ void	Parser::setLink(const std::string &comp1, const std::string &comp2)
 		getComponentByName(comp2.substr(0, pos2)).setLink(
 			std::stoi(comp2.substr(pos2 + 1)),
 			getComponentByName(comp1.substr(0, pos1)),
-			std::stoi(comp1.substr(pos1 + 1)));		
+			std::stoi(comp1.substr(pos1 + 1)));
 	}
 	catch (std::exception error){
 		throw Exception("Parser: when linking");

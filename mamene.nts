@@ -7,5 +7,5 @@ output out
 .links:
 a:1 nor:1
 b:1 nor:2
-nor:2 out:1
+nor:3 out:1
 out:1 nor:4
