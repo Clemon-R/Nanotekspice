@@ -48,11 +48,11 @@ namespace nts
 			offset = 1;
 			break;
 		default:
-			throw Exception("Error compute wrong pin");
+			throw Exception("4001 - " + std::to_string(pin) + ": is not a valid output");
 			break;
 		}
 		if (_link.find(pin + 2 * offset) == _link.end() || _link.find(pin + offset) == _link.end())
-			throw Exception("Pin not found");
+			throw Exception("4001 - " + std::to_string(pin) + ": both input not set");
 		comp1 = _link[pin + 2 * offset];
 		comp2 = _link[pin + offset];
 		_state = getState(comp1, comp2);
@@ -62,8 +62,10 @@ namespace nts
 	void	component4001::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 	{
 		if (pin < 1 || pin > 14)
-			throw Exception("Pin not found");
+			throw Exception("4001 - " + std::to_string(pin) + ": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
+		Parser::removeComponent(*this);
+		Parser::removeComponent(other);
 	}
 
 	void	component4001::dump() const

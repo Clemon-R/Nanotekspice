@@ -15,5 +15,8 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		throw Exception("Too few arguments");
 	Parser::parseFile(std::string(argv[1]));
+	for (const auto &elem : Parser::getOutput()){
+		elem.second->compute(1);
+	}
 	return (0);
 }

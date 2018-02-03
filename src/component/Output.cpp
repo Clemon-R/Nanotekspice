@@ -12,19 +12,17 @@
 
 namespace nts
 {
-	Output::Output(nts::Tristate state) : _state(state)
+	Output::Output(nts::Tristate state) : _state(state), _set(false)
 	{
 	}
 	
 	nts::Tristate	Output::compute(std::size_t pin)
 	{
 		if (pin != 1)
-			throw Exception("Error pin not found");
-		try{
-			_state = std::get<0>(_link)->compute(std::get<1>(_link));
-		}catch (std::exception &error){
-			throw Exception("Error pin not found");
-		}
+			throw Exception("Output - " + std::to_string(pin) + ": not output available");
+		else if (!_set)
+			throw Exception("Output - 1: not set");
+		_state = std::get<0>(_link)->compute(std::get<1>(_link));
 		dump();
 		return (_state);
 	}
@@ -32,8 +30,11 @@ namespace nts
 	void	Output::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 	{
 		if (pin != 1)
-			throw Exception("Error pin not found");
+			throw Exception("Output - " + std::to_string(pin) + ": not available");
 		_link = std::make_tuple(&other, otherPin);
+		Parser::removeComponent(*static_cast<const nts::IComponent *>(this));
+		Parser::removeComponent(other);
+		_set = true;
 	}
 
 	void	Output::dump() const

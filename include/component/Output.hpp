@@ -25,6 +25,7 @@ namespace nts
 	private:
 		std::tuple<nts::IComponent *, std::size_t>	_link;
 		nts::Tristate	_state;
+		bool		_set;
 	};
 }
 #endif

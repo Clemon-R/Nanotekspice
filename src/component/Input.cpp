@@ -19,13 +19,13 @@ namespace nts
 	nts::Tristate	Input::compute(std::size_t pin)
 	{
 		if (pin != 1)
-			throw Exception("Pin not found");
+			throw Exception("Input - " + std::to_string(pin) + ": not available output");
 		return (_state);
 	}
 
-	void	Input::setLink(std::size_t, nts::IComponent &, std::size_t)
+	void	Input::setLink(std::size_t pin, nts::IComponent &, std::size_t)
 	{
-		throw Exception("Impossible to set a link on input");
+		throw Exception("Input - " + std::to_string(pin) + ": not available");
 	}
 
 	void	Input::dump() const

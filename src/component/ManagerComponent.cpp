@@ -6,6 +6,7 @@
 //
 
 #include <map>
+#include "Exception.hpp"
 #include "ManagerComponent.hpp"
 #include "component/Input.hpp"
 #include "component/Output.hpp"
@@ -33,8 +34,9 @@ namespace nts
 		listComponent["4514"] = create4514;
 		listComponent["4801"] = create4801;
 		listComponent["2716"] = create2716;
-			        
-		return (listComponent[type] != nullptr ? listComponent[type](value) : nullptr);
+		if (listComponent.find(type) == listComponent.end())
+			throw Exception("Component - " + type + ": unknown");
+		return (listComponent[type](value));
 	}
 
 	std::unique_ptr<IComponent>	ManagerComponent::create4001(const std::string &value)
