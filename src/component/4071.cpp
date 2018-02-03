@@ -8,15 +8,15 @@
 #include <iostream>
 #include "Exception.hpp"
 #include "Parser.hpp"
-#include "component/4001.hpp"
+#include "component/4071.hpp"
 
 namespace nts
 {
-	component4001::component4001(nts::Tristate state) : _state(state)
+	component4071::component4071(nts::Tristate state) : _state(state)
 	{
 	}
 
-	nts::Tristate	component4001::getState(std::tuple<IComponent *, std::size_t> comp1
+	nts::Tristate	component4071::getState(std::tuple<IComponent *, std::size_t> comp1
 						, std::tuple<IComponent *, std::size_t> comp2)
 	{
 		nts::Tristate	state1;
@@ -25,13 +25,13 @@ namespace nts
 		state1 = std::get<0>(comp1)->compute(std::get<1>(comp1));
 		state2 = std::get<0>(comp2)->compute(std::get<1>(comp2));
 		if (state1 == nts::Tristate::TRUE || state2 == nts::Tristate::TRUE)
-			return (nts::Tristate::FALSE);
+			return (nts::Tristate::TRUE);
 		else if (state1 == nts::Tristate::UNDEFINED || state2 == nts::Tristate::UNDEFINED)
 			return (nts::Tristate::UNDEFINED);
-		return (nts::Tristate::TRUE);
+		return (nts::Tristate::FALSE);
 	}
 	
-	nts::Tristate	component4001::compute(std::size_t pin)
+	nts::Tristate	component4071::compute(std::size_t pin)
 	{
 		std::tuple<IComponent *, std::size_t>	comp1;
 		std::tuple<IComponent *, std::size_t>	comp2;
@@ -48,27 +48,27 @@ namespace nts
 			offset = 1;
 			break;
 		default:
-			throw Exception("4001 - " + std::to_string(pin) + ": is not a valid output");
+			throw Exception("4071 - " + std::to_string(pin) + ": is not a valid output");
 			break;
 		}
 		if (_link.find(pin + 2 * offset) == _link.end() || _link.find(pin + offset) == _link.end())
-			throw Exception("4001 - " + std::to_string(pin) + ": both input not set");
+			throw Exception("4071 - " + std::to_string(pin) + ": both input not set");
 		comp1 = _link[pin + 2 * offset];
 		comp2 = _link[pin + offset];
 		_state = getState(comp1, comp2);
 		return (_state);		
 	}
 
-	void	component4001::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+	void	component4071::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 	{
 		if (pin < 1 || pin > 14)
-			throw Exception("4001 - " + std::to_string(pin) + ": not available");
+			throw Exception("4071 - " + std::to_string(pin) + ": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
 		Parser::removeComponent(*this);
 		Parser::removeComponent(other);
 	}
 
-	void	component4001::dump() const
+	void	component4071::dump() const
 	{
 		std::cout << Parser::getNameByComponent(*static_cast<const nts::IComponent *>(this));
 		if (_state == nts::Tristate::TRUE)

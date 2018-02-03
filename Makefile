@@ -15,6 +15,7 @@ SRC_CPP	+=	$(addprefix src/component/,	\
 		Input.cpp	\
 		Output.cpp	\
 		4001.cpp	\
+		4071.cpp	\
 		)
 
 SRC_CPP	+=	$(addprefix src/parser/,	\
@@ -29,6 +30,7 @@ SRC_HPP	=	$(addprefix include/,	\
 		component/Input.hpp	\
 		component/Output.hpp	\
 		component/4001.hpp	\
+		component/4071.hpp	\
 		)
 
 SRC	=	$(SRC_CPP)	\
