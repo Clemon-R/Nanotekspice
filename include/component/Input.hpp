@@ -19,6 +19,7 @@ namespace nts
 		nts::Tristate	compute(std::size_t) override;
 		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
 		void	dump() const override;
+		void	setValue(nts::Tristate);
 	private:
 		nts::Tristate	_state;
 	};

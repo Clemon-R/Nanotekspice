@@ -6,7 +6,7 @@
 //
 
 #include <iostream>
-#include "Parser.hpp"
+#include "Database.hpp"
 #include "component/Input.hpp"
 #include "Exception.hpp"
 
@@ -30,7 +30,7 @@ namespace nts
 
 	void	Input::dump() const
 	{
-		std::cout << Parser::getNameByComponent(*static_cast<const nts::IComponent *>(this));
+		std::cout << Database::getNameByComponent(*this);
 		if (_state == nts::Tristate::TRUE)
 			std::cout << "=1";
 		else if (_state == nts::Tristate::FALSE)
@@ -38,5 +38,10 @@ namespace nts
 		else
 			std::cout << "=U";
 		std::cout << std::endl;		
+	}
+
+	void	Input::setValue(nts::Tristate state)
+	{
+		_state = state;
 	}
 }

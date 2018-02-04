@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "Exception.hpp"
-#include "Parser.hpp"
+#include "Database.hpp"
 #include "component/4001.hpp"
 
 namespace nts
@@ -64,13 +64,13 @@ namespace nts
 		if (pin < 1 || pin > 14)
 			throw Exception("4001 - " + std::to_string(pin) + ": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
-		Parser::removeComponent(*this);
-		Parser::removeComponent(other);
+		Database::isLinked(*this);
+		Database::isLinked(other);
 	}
 
 	void	component4001::dump() const
 	{
-		std::cout << Parser::getNameByComponent(*static_cast<const nts::IComponent *>(this));
+		std::cout << Database::getNameByComponent(*this);
 		if (_state == nts::Tristate::TRUE)
 			std::cout << "=1";
 		else if (_state == nts::Tristate::FALSE)

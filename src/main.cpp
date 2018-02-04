@@ -9,14 +9,21 @@
 #include "Exception.hpp"
 #include "ManagerComponent.hpp"
 #include "Parser.hpp"
+#include "Database.hpp"
+#include "Parameter.hpp"
 
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
 		throw Exception("Too few arguments");
 	Parser::parseFile(std::string(argv[1]));
-	for (const auto &elem : Parser::getOutput()){
-		elem.second->compute(1);
+	Parameter::parseParams(2, argc, argv);
+	Parser::checkSettings();
+	for (const auto &elem : Database::getComponents()){
+		if (std::get<0>(elem.second) == Database::Type::OUTPUT){
+			elem.first->compute(1);
+			elem.first->dump();
+		}
 	}
 	return (0);
 }

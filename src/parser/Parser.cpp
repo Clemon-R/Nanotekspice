@@ -9,10 +9,8 @@
 #include "Exception.hpp"
 #include "Parser.hpp"
 #include "ManagerComponent.hpp"
+#include "Database.hpp"
 
-std::map<std::string, std::unique_ptr<nts::IComponent>>	Parser::_list;
-std::list<nts::IComponent *>	Parser::_components;
-std::map<std::string, nts::IComponent *>	Parser::_output;
 std::string	Parser::_step;
 
 void	Parser::parseFile(const std::string &file_name)
@@ -26,30 +24,18 @@ void	Parser::parseFile(const std::string &file_name)
 	while (getline(file, line))
 		parseLine(line);
 	file.close();
-	checkSettings();
 }
 
 void	Parser::checkSettings()
 {
-	if (_components.size() > 0)
-		throw Exception("Parser: all components are not linked - " + std::to_string(_components.size()));
-}
-
-nts::IComponent	&Parser::getComponentByName(const std::string &name)
-{
-        if (_list.find(name) == _list.end() || _list[name] == nullptr)
-		throw Exception("Parser - " + name + ": component not found");
-	return (*_list[name]);
-}
-
-const std::string	&Parser::getNameByComponent(const nts::IComponent &comp)
-{
-	for (const auto &elem : _list){
-		if (&(*elem.second) == &comp){
-			return (elem.first);
-		}
+	for (const auto &elem : Database::getComponents()){
+		if (std::get<2>(elem.second) == false)
+			throw Exception("Parser - " + std::get<1>(elem.second) \
+					+ ": is not linked");
+		else if (std::get<3>(elem.second) == false)
+			throw Exception("Parser - " + std::get<1>(elem.second) \
+					+ ": is not set");
 	}
-	throw Exception("Parser: impossible to find name of one component");
 }
 
 void	Parser::parseLine(const std::string &line)
@@ -79,6 +65,7 @@ void	Parser::parseChipsets(const std::string &line)
 	std::string	type;
 	std::string	name = "";
 	std::string	value = "";
+	nts::IComponent	*comp;
 	
 	if (pos == std::string::npos)
 		throw Exception("Parser: name not found");
@@ -91,12 +78,9 @@ void	Parser::parseChipsets(const std::string &line)
 	}
 	if (name == "")
 		throw Exception("Parser: name not found");
-	else if (_list.find(name) != _list.end())
-		throw Exception("Parser - " + name + ": double usage of this name");
-	_list[name] = nts::ManagerComponent::createComponent(type, value);
-	_components.push_back(&(*_list[name]));
-	if (type == "output")
-		_output[name] = &(*_list[name]);
+	comp = &Database::addComponent(nts::ManagerComponent::createComponent(type, value), name, type);
+	if (value != "")
+		Database::hasValue(*comp);
 }
 
 void	Parser::parseLinks(const std::string &line)
@@ -120,32 +104,12 @@ void	Parser::setLink(const std::string &comp1, const std::string &comp2)
 	if (pos1 == std::string::npos || pos2 == std::string::npos)
 		throw Exception("Parser: one line doesn't contains pin");
 	try{
-		getComponentByName(comp2.substr(0, pos2)).setLink(
+		Database::getComponentByName(comp2.substr(0, pos2)).setLink(
 			std::stoi(comp2.substr(pos2 + 1)),
-			getComponentByName(comp1.substr(0, pos1)),
+			Database::getComponentByName(comp1.substr(0, pos1)),
 			std::stoi(comp1.substr(pos1 + 1)));
 	}
 	catch (std::exception error){
 		throw Exception("Parser: when linking");
-	}
-}
-
-std::list<nts::IComponent *>	&Parser::getComponents()
-{
-	return (_components);
-}
-
-std::map<std::string, nts::IComponent *>	&Parser::getOutput()
-{
-	return (_output);
-}
-
-void	Parser::removeComponent(const nts::IComponent &comp)
-{
-	for (const auto &elem : _components){
-		if (elem == &comp){
-			_components.remove(elem);
-			break;
-		}
 	}
 }

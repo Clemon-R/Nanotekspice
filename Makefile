@@ -7,6 +7,7 @@
 
 SRC_CPP	=	$(addprefix src/,	\
 		Exception.cpp	\
+		Database.cpp	\
 		main.cpp	\
 		)
 
@@ -20,13 +21,16 @@ SRC_CPP	+=	$(addprefix src/component/,	\
 
 SRC_CPP	+=	$(addprefix src/parser/,	\
 		Parser.cpp	\
+		Parameter.cpp	\
 		)
 
 SRC_HPP	=	$(addprefix include/,	\
 		IComponent.hpp	\
 		ManagerComponent.hpp	\
 		Exception.hpp		\
+		Database.hpp		\
 		Parser.hpp		\
+		Parameter.hpp		\
 		component/Input.hpp	\
 		component/Output.hpp	\
 		component/4001.hpp	\
