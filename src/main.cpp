@@ -11,6 +11,7 @@
 #include "Parser.hpp"
 #include "Database.hpp"
 #include "Parameter.hpp"
+#include "Command.hpp"
 
 int	main(int argc, char **argv)
 {
@@ -25,5 +26,6 @@ int	main(int argc, char **argv)
 			elem.first->dump();
 		}
 	}
+	std::make_unique<Command>();
 	return (0);
 }

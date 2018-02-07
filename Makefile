@@ -8,6 +8,7 @@
 SRC_CPP	=	$(addprefix src/,	\
 		Exception.cpp	\
 		Database.cpp	\
+		Command.cpp	\
 		main.cpp	\
 		)
 
@@ -31,6 +32,7 @@ SRC_HPP	=	$(addprefix include/,	\
 		Database.hpp		\
 		Parser.hpp		\
 		Parameter.hpp		\
+		Command.hpp		\
 		component/Input.hpp	\
 		component/Output.hpp	\
 		component/4001.hpp	\
@@ -50,7 +52,7 @@ RM	=	rm
 
 CXX	=	g++
 
-NAME	=	a.out
+NAME	=	nanotekspice
 
 all:	$(NAME)
 
