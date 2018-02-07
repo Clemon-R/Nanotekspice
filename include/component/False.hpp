@@ -5,22 +5,21 @@
 // 
 //
 
-#ifndef INPUT_HPP_
-# define INPUT_HPP_
+#ifndef FALSE_HPP_
+# define FALSE_HPP_
 
 # include "IComponent.hpp"
 
 namespace nts
 {
-	class Input : public IComponent
+	class False : public IComponent
 	{
 	public:
-		Input(nts::Tristate);
+		False();
 		nts::Tristate	compute(std::size_t) override;
 		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
 		void	dump() const override;
-		void	setValue(nts::Tristate);
-	protected:
+	private:
 		nts::Tristate	_state;
 	};
 }

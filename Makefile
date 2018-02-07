@@ -15,6 +15,9 @@ SRC_CPP	=	$(addprefix src/,	\
 SRC_CPP	+=	$(addprefix src/component/,	\
 		ManagerComponent.cpp	\
 		Input.cpp	\
+		True.cpp	\
+		False.cpp	\
+		Clock.cpp	\
 		Output.cpp	\
 		4001.cpp	\
 		4071.cpp	\
@@ -34,6 +37,9 @@ SRC_HPP	=	$(addprefix include/,	\
 		Parameter.hpp		\
 		Command.hpp		\
 		component/Input.hpp	\
+		component/True.hpp	\
+		component/False.hpp	\
+		component/Clock.hpp	\
 		component/Output.hpp	\
 		component/4001.hpp	\
 		component/4071.hpp	\

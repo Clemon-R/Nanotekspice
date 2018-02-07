@@ -6,6 +6,7 @@
 //
 
 #include <fstream>
+#include <algorithm>
 #include "Exception.hpp"
 #include "Parser.hpp"
 #include "ManagerComponent.hpp"
@@ -17,12 +18,18 @@ void	Parser::parseFile(const std::string &file_name)
 {
 	std::string	line;
 	std::ifstream	file(file_name);
+	std::size_t	ret;
 
 	if (!file.is_open())
 		throw Exception("Parser: impossible to open the given file");
 	Parser::_step = "";
-	while (getline(file, line))
+	while (getline(file, line)){
+		std::replace(line.begin(), line.end(), '\t', ' ');
+		ret = line.find('\r');
+		if (ret != std::string::npos)
+			line.erase(ret);
 		parseLine(line);
+	}
 	file.close();
 }
 
@@ -109,7 +116,7 @@ void	Parser::setLink(const std::string &comp1, const std::string &comp2)
 			Database::getComponentByName(comp1.substr(0, pos1)),
 			std::stoi(comp1.substr(pos1 + 1)));
 	}
-	catch (std::exception error){
+	catch (std::exception &error){
 		throw Exception("Parser: when linking");
 	}
 }

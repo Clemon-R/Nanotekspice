@@ -97,5 +97,13 @@ void	Command::input(const std::string &input, const std::string &value)
 		state = nts::Tristate::TRUE;
 	else if (value == "0")
 		state = nts::Tristate::FALSE;
-	(static_cast<nts::Input &>(Database::getComponentByName(input))).setValue(state);
+	for (const auto &elem : Database::getComponents()){
+		if (std::get<1>(elem.second) != input)
+			continue;
+		if (std::get<0>(elem.second) <= Database::Type::CLOCK){
+			(static_cast<nts::Input &>(*elem.first)).setValue(state);
+			return;
+		}
+	}
+	throw Exception("Command - " + input + ": input not found");
 }

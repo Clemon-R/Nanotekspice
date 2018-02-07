@@ -12,17 +12,23 @@ std::map<std::unique_ptr<nts::IComponent>, std::tuple<Database::Type, std::strin
 
 nts::IComponent	&Database::addComponent(std::unique_ptr<nts::IComponent> comp, const std::string &name, const std::string &type)
 {
-	Database::Type	kind = Database::Type::UNDEFINED;
 	nts::IComponent	*pointer = comp.get();
 	
 	for (const auto &elem : _list){
 		if (std::get<1>(elem.second) == name)
 			throw Exception("Database - " + name + ": double usage of this name");
 	}
-	if (type == "output" || type == "input")
-		kind = type == "output" ? Database::Type::OUTPUT : Database::Type::INPUT;
-	_list[std::move(comp)] = std::make_tuple(kind, name, false, type != "input" ? true : false);
+	_list[std::move(comp)] = std::make_tuple(getType(type), name, false, type != "input" ? true : false);
 	return (*pointer);
+}
+
+Database::Type	Database::getType(const std::string &type)
+{
+	if (type == "input" || type == "clock")
+		return (type == "input" ? Database::Type::INPUT : Database::Type::CLOCK);
+	else if (type == "output")
+		return (Database::Type::OUTPUT);
+	return (Database::Type::UNDEFINED);
 }
 
 

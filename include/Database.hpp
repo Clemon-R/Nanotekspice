@@ -20,6 +20,7 @@ public:
 	enum Type
 	{
 		INPUT,
+		CLOCK,
 		OUTPUT,
 		UNDEFINED
 	};
@@ -32,6 +33,8 @@ public:
 	static void	isLinked(nts::IComponent &);
 	static void	hasValue(nts::IComponent &);
 private:
+	static Database::Type	getType(const std::string &);
+	
 	static std::map<std::unique_ptr<nts::IComponent>, std::tuple<Type, std::string, bool, bool>>	_list;
 };
 

@@ -14,7 +14,6 @@
 void	Parameter::parseParams(int index, int size, char **args)
 {
 	std::size_t	pos;
-	nts::IComponent	*comp;
 	std::string	arg;
 	
 	while (index < size)
@@ -23,10 +22,22 @@ void	Parameter::parseParams(int index, int size, char **args)
 		pos = arg.find('=');
 		if (pos == std::string::npos)
 			throw Exception("Parameter: error syntax");
-		comp = &Database::getComponentByName(arg.substr(0, pos));
-		setInput(*static_cast<nts::Input *>(comp), arg.substr(pos + 1));
+		parseInput(arg.substr(0, pos), arg.substr(pos + 1));
 		index += 1;
 	}
+}
+
+void	Parameter::parseInput(const std::string &input, const std::string &value)
+{
+	for (const auto &elem : Database::getComponents()){
+		if (std::get<1>(elem.second) != input)
+			continue;
+		if (std::get<0>(elem.second) <= Database::Type::CLOCK){
+			setInput(static_cast<nts::Input &>(*elem.first), value);
+			return;
+		}
+	}
+	throw Exception("Parameter - " + input + ": input not found");
 }
 
 void	Parameter::setInput(nts::Input &comp, const std::string &value)

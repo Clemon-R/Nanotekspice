@@ -15,6 +15,8 @@ class Parameter
 {
 public:
 	static void	parseParams(int, int, char **);
+private:
+	static void	parseInput(const std::string &, const std::string &);
 	static void	setInput(nts::Input &, const std::string &);
 };
 
