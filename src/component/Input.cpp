@@ -43,5 +43,6 @@ namespace nts
 	void	Input::setValue(nts::Tristate state)
 	{
 		_state = state;
+		Database::hasValue(*this);
 	}
 }

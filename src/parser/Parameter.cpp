@@ -38,5 +38,4 @@ void	Parameter::setInput(nts::Input &comp, const std::string &value)
 	else if (value == "0")
 		kind = nts::Tristate::FALSE;
 	comp.setValue(kind);
-	Database::hasValue(comp);
 }
