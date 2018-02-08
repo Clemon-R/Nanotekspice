@@ -107,14 +107,20 @@ void	Parser::setLink(const std::string &comp1, const std::string &comp2)
 {
 	std::size_t	pos1 = comp1.find(':');
 	std::size_t	pos2 = comp2.find(':');
+	nts::IComponent	*first = nullptr;
+	nts::IComponent	*second = nullptr;
 	
 	if (pos1 == std::string::npos || pos2 == std::string::npos)
 		throw Exception("Parser: one line doesn't contains pin");
 	try{
-		Database::getComponentByName(comp2.substr(0, pos2)).setLink(
-			std::stoi(comp2.substr(pos2 + 1)),
-			Database::getComponentByName(comp1.substr(0, pos1)),
-			std::stoi(comp1.substr(pos1 + 1)));
+		first = &Database::getComponentByName(comp2.substr(0, pos2));
+		second = &Database::getComponentByName(comp1.substr(0, pos1));
+		if (Database::isInput(*second))
+			first->setLink(std::stoi(comp2.substr(pos2 + 1))
+			, *second, std::stoi(comp1.substr(pos1 + 1)));
+		else
+			second->setLink(std::stoi(comp1.substr(pos1 + 1))
+			, *first, std::stoi(comp2.substr(pos2 + 1)));
 	}
 	catch (std::exception &error){
 		throw Exception("Parser: when linking");
