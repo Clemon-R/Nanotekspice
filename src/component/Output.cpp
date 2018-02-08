@@ -21,7 +21,7 @@ namespace nts
 		if (pin != 1)
 			throw Exception("Output - " + std::to_string(pin) + ": not output available");
 		else if (!_set)
-			throw Exception("Output - 1: not set");
+			return (nts::Tristate::UNDEFINED);
 		_state = std::get<0>(_link)->compute(std::get<1>(_link));
 		return (_state);
 	}
