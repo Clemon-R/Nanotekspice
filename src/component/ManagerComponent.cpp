@@ -18,6 +18,7 @@
 #include "component/4011.hpp"
 #include "component/4030.hpp"
 #include "component/4071.hpp"
+#include "component/4081.hpp"
 
 namespace nts
 {
@@ -40,8 +41,8 @@ namespace nts
 		/*listComponent["4040"] = create4040;
 		listComponent["4069"] = create4069;*/
 		listComponent["4071"] = create4071;
-		/*listComponent["4081"] = create4081;
-		listComponent["4094"] = create4094;
+		listComponent["4081"] = create4081;
+		/*listComponent["4094"] = create4094;
 		listComponent["4514"] = create4514;
 		listComponent["4801"] = create4801;
 		listComponent["2716"] = create2716;*/
@@ -102,7 +103,8 @@ namespace nts
 	
 	std::unique_ptr<IComponent>     ManagerComponent::create4081(const std::string &value)
 	{
-		return (nullptr);
+		(void)value;
+		return (std::make_unique<component4081>());
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4094(const std::string &value)
