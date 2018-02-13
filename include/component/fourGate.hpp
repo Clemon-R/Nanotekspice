@@ -9,6 +9,7 @@
 # define FOURGATE_HPP_
 
 # include "IComponent.hpp"
+# include "LogicBinary.hpp"
 # include <map>
 
 namespace nts

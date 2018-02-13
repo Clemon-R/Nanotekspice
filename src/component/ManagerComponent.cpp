@@ -14,9 +14,10 @@
 #include "component/Clock.hpp"
 #include "component/Output.hpp"
 #include "component/4001.hpp"
+#include "component/4008.hpp"
 #include "component/4011.hpp"
-#include "component/4071.hpp"
 #include "component/4030.hpp"
+#include "component/4071.hpp"
 
 namespace nts
 {
@@ -30,7 +31,7 @@ namespace nts
 		listComponent["clock"] = createClock;
 		listComponent["output"] = createOutput;
 		listComponent["4001"] = create4001;
-		//listComponent["4008"] = create4008;
+		listComponent["4008"] = create4008;
 		listComponent["4011"] = create4011;
 		//listComponent["4013"] = create4013;
 		//listComponent["4017"] = create4017;
@@ -56,7 +57,8 @@ namespace nts
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4008(const std::string &value)
 	{
-		return (nullptr);
+		(void)value;
+		return (std::make_unique<component4008>());
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4011(const std::string &value)

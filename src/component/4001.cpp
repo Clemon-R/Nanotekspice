@@ -24,10 +24,6 @@ namespace nts
 
 		state1 = std::get<0>(comp1)->compute(std::get<1>(comp1));
 		state2 = std::get<0>(comp2)->compute(std::get<1>(comp2));
-		if (state1 == nts::Tristate::TRUE || state2 == nts::Tristate::TRUE)
-			return (nts::Tristate::FALSE);
-		else if (state1 == nts::Tristate::UNDEFINED || state2 == nts::Tristate::UNDEFINED)
-			return (nts::Tristate::UNDEFINED);
-		return (nts::Tristate::TRUE);
+		return (LogicBinary::binaryNor(state1, state2));
 	}
 }
