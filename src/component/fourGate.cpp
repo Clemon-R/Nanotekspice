@@ -20,18 +20,22 @@ namespace nts
 		int	offset = 0;
 		
 		if (pin != 3 && pin != 4 && pin != 10 && pin != 11)
-			throw Exception("FourGate - " + std::to_string(pin) + ": is not a valid output");
+			throw Exception("FourGate - " + std::to_string(pin) + 
+			": is not a valid output");
 		offset = pin == 3 || pin == 11 ? -1 : 1;
-		if (_link.find(pin + 2 * offset) == _link.end() || _link.find(pin + offset) == _link.end())
+		if (_link.find(pin + 2 * offset) == _link.end() || 
+		_link.find(pin + offset) == _link.end())
 			return (nts::Tristate::UNDEFINED);
 		_state = getState(_link[pin + 2 * offset], _link[pin + offset]);
 		return (_state);		
 	}
 
-	void	fourGate::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+	void	fourGate::setLink(std::size_t pin, nts::IComponent &other, 
+	std::size_t otherPin)
 	{
 		if (pin < 1 || pin > 14)
-			throw Exception("FourGate - " + std::to_string(pin) + ": not available");
+			throw Exception("FourGate - " + std::to_string(pin) + 
+			": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
 		Database::isLinked(*this);
 		Database::isLinked(other);

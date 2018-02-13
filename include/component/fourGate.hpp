@@ -22,7 +22,8 @@ namespace nts
 		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
 		void	dump() const override;
 	protected:
-		virtual Tristate	getState(std::tuple<IComponent *, std::size_t>, std::tuple<IComponent *, std::size_t>) = 0;
+		virtual Tristate	getState(std::tuple<IComponent *, std::size_t>, 
+		std::tuple<IComponent *, std::size_t>) = 0;
 
 		std::map<std::size_t, std::tuple<IComponent *, std::size_t>>	_link;
 		nts::Tristate	_state;

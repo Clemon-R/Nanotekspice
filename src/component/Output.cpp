@@ -19,17 +19,20 @@ namespace nts
 	nts::Tristate	Output::compute(std::size_t pin)
 	{
 		if (pin != 1)
-			throw Exception("Output - " + std::to_string(pin) + ": not output available");
+			throw Exception("Output - " + std::to_string(pin) + 
+			": not output available");
 		else if (!_set)
 			return (nts::Tristate::UNDEFINED);
 		_state = std::get<0>(_link)->compute(std::get<1>(_link));
 		return (_state);
 	}
 
-	void	Output::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+	void	Output::setLink(std::size_t pin, nts::IComponent &other, 
+	std::size_t otherPin)
 	{
 		if (pin != 1)
-			throw Exception("Output - " + std::to_string(pin) + ": not available");
+			throw Exception("Output - " + std::to_string(pin) + 
+			": not available");
 		_link = std::make_tuple(&other, otherPin);
 		Database::isLinked(*this);
 		Database::isLinked(other);

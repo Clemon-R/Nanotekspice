@@ -19,7 +19,8 @@ namespace nts
 	nts::Tristate	Input::compute(std::size_t pin)
 	{
 		if (pin != 1)
-			throw Exception("Input - " + std::to_string(pin) + ": not available output");
+			throw Exception("Input - " + std::to_string(pin) + 
+			": not available output");
 		return (_state);
 	}
 

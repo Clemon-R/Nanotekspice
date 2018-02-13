@@ -19,13 +19,15 @@ namespace nts
 	nts::Tristate	True::compute(std::size_t pin)
 	{
 		if (pin != 1)
-			throw Exception("True - " + std::to_string(pin) + ": not available output");
+			throw Exception("True - " + std::to_string(pin) + 
+			": not available output");
 		return (_state);
 	}
 
 	void	True::setLink(std::size_t pin, nts::IComponent &, std::size_t)
 	{
-		throw Exception("True - " + std::to_string(pin) + ": not available");
+		throw Exception("True - " + std::to_string(pin) + 
+		": not available");
 	}
 
 	void	True::dump() const

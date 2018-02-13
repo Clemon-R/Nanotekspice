@@ -21,7 +21,8 @@
 
 namespace nts
 {
-	std::unique_ptr<IComponent>	ManagerComponent::createComponent(const std::string &type, const std::string &value)
+	std::unique_ptr<IComponent>	ManagerComponent::createComponent(
+		const std::string &type, const std::string &value)
 	{
 		std::map<std::string, functionComponent>	listComponent;
 

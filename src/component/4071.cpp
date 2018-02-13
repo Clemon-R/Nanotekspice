@@ -16,8 +16,9 @@ namespace nts
 	{
 	}
 
-	nts::Tristate	component4071::getState(std::tuple<IComponent *, std::size_t> comp1
-						, std::tuple<IComponent *, std::size_t> comp2)
+	nts::Tristate	component4071::getState(std::tuple<IComponent *,
+						std::size_t> comp1, std::tuple<IComponent *,
+						std::size_t> comp2)
 	{
 		nts::Tristate	state1;
 		nts::Tristate	state2;

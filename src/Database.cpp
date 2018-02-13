@@ -10,7 +10,8 @@
 
 std::map<std::unique_ptr<nts::IComponent>, std::tuple<Database::Type, std::string, bool, bool>>	Database::_list;
 
-nts::IComponent	&Database::addComponent(std::unique_ptr<nts::IComponent> comp, const std::string &name, const std::string &type)
+nts::IComponent	&Database::addComponent(std::unique_ptr<nts::IComponent> comp,
+const std::string &name, const std::string &type)
 {
 	nts::IComponent	*pointer = comp.get();
 	
@@ -18,7 +19,8 @@ nts::IComponent	&Database::addComponent(std::unique_ptr<nts::IComponent> comp, c
 		if (std::get<1>(elem.second) == name)
 			throw Exception("Database - " + name + ": double usage of this name");
 	}
-	_list[std::move(comp)] = std::make_tuple(getType(type), name, false, type != "input" ? true : false);
+	_list[std::move(comp)] = std::make_tuple(getType(type), name, false, 
+										type != "input" ? true : false);
 	return (*pointer);
 }
 

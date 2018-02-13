@@ -21,7 +21,8 @@ namespace nts
 		nts::Tristate	current = _state;
 
 		if (pin != 1)
-			throw Exception("Input - " + std::to_string(pin) + ": not available output");
+			throw Exception("Input - " + std::to_string(pin) + 
+			": not available output");
 		if (_state == nts::Tristate::TRUE)
 			_state = nts::Tristate::FALSE;
 		else if (_state == nts::Tristate::FALSE)
