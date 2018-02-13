@@ -14,7 +14,9 @@
 #include "component/Clock.hpp"
 #include "component/Output.hpp"
 #include "component/4001.hpp"
+#include "component/4011.hpp"
 #include "component/4071.hpp"
+#include "component/4030.hpp"
 
 namespace nts
 {
@@ -28,12 +30,12 @@ namespace nts
 		listComponent["clock"] = createClock;
 		listComponent["output"] = createOutput;
 		listComponent["4001"] = create4001;
-		/*listComponent["4008"] = create4008;
+		//listComponent["4008"] = create4008;
 		listComponent["4011"] = create4011;
-		listComponent["4013"] = create4013;
-		listComponent["4017"] = create4017;
+		//listComponent["4013"] = create4013;
+		//listComponent["4017"] = create4017;
 		listComponent["4030"] = create4030;
-		listComponent["4040"] = create4040;
+		/*listComponent["4040"] = create4040;
 		listComponent["4069"] = create4069;*/
 		listComponent["4071"] = create4071;
 		/*listComponent["4081"] = create4081;
@@ -48,13 +50,8 @@ namespace nts
 
 	std::unique_ptr<IComponent>	ManagerComponent::create4001(const std::string &value)
 	{
-		nts::Tristate   state = nts::Tristate::UNDEFINED;
-
-		if (value == "1")
-			state = nts::Tristate::TRUE;
-		else if (value == "0")
-			state = nts::Tristate::FALSE;		
-		return (std::make_unique<component4001>(state));
+		(void)value;
+		return (std::make_unique<component4001>());
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4008(const std::string &value)
@@ -64,7 +61,8 @@ namespace nts
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4011(const std::string &value)
 	{
-		return (nullptr);
+		(void)value;
+		return (std::make_unique<component4011>());
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4013(const std::string &value)
@@ -79,7 +77,8 @@ namespace nts
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4030(const std::string &value)
 	{
-		return (nullptr);
+		(void)value;
+		return (std::make_unique<component4030>());
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4040(const std::string &value)
@@ -94,13 +93,8 @@ namespace nts
 
 	std::unique_ptr<IComponent>     ManagerComponent::create4071(const std::string &value)
 	{
-		nts::Tristate   state = nts::Tristate::UNDEFINED;
-
-		if (value == "1")
-			state = nts::Tristate::TRUE;
-		else if (value == "0")
-			state = nts::Tristate::FALSE;
-		return (std::make_unique<component4071>(state));
+		(void)value;
+		return (std::make_unique<component4071>());
 	}
 	
 	std::unique_ptr<IComponent>     ManagerComponent::create4081(const std::string &value)
@@ -159,17 +153,12 @@ namespace nts
 	std::unique_ptr<IComponent>     ManagerComponent::createFalse(const std::string &value)
 	{
 		(void)value;
-        	return (std::make_unique<False>());
+        return (std::make_unique<False>());
 	}
 
 	std::unique_ptr<IComponent>     ManagerComponent::createOutput(const std::string &value)
 	{
-		nts::Tristate   state = nts::Tristate::UNDEFINED;
-
-		if (value == "1")
-			state = nts::Tristate::TRUE;
-		else if (value == "0")
-			state = nts::Tristate::FALSE;
-		return (std::make_unique<Output>(state));		
+		(void)value;
+		return (std::make_unique<Output>(nts::Tristate::UNDEFINED));		
 	}	
 }

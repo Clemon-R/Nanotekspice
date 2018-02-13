@@ -12,7 +12,7 @@
 
 namespace nts
 {
-	component4071::component4071(nts::Tristate state) : nts::fourGate(state)
+	component4071::component4071() : nts::fourGate(nts::Tristate::UNDEFINED)
 	{
 	}
 

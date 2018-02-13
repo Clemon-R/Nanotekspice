@@ -15,7 +15,7 @@ namespace nts
 	class component4001 : public fourGate
 	{
 	public:
-		component4001(nts::Tristate);
+		component4001();
 	private:
 		Tristate	getState(std::tuple<IComponent *, std::size_t>, std::tuple<IComponent *, std::size_t>) override;
 	};
