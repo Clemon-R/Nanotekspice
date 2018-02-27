@@ -25,6 +25,7 @@ SRC_CPP	+=	$(addprefix src/component/,	\
 		4008.cpp	\
 		4011.cpp	\
 		4030.cpp	\
+		4069.cpp	\
 		4071.cpp	\
 		4081.cpp	\
 		)
@@ -53,6 +54,7 @@ SRC_HPP	=	$(addprefix include/,	\
 		component/4008.hpp	\
 		component/4011.hpp	\
 		component/4030.hpp	\
+		component/4069.hpp	\
 		component/4071.hpp	\
 		component/4081.hpp	\
 		)
