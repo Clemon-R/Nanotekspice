@@ -67,7 +67,7 @@ void	Parser::parseLine(const std::string &line)
 
 void	Parser::parseChipsets(const std::string &line)
 {
-	std::size_t	pos = line.find(' ');
+	std::size_t	pos = line.find_last_of(' ');
 	std::size_t	pos_v = line.find('(');
 	std::string	type;
 	std::string	name = "";
@@ -76,7 +76,7 @@ void	Parser::parseChipsets(const std::string &line)
 	
 	if (pos == std::string::npos)
 		throw Exception("Parser: name not found");
-	type = line.substr(0, pos);
+	type = line.substr(0, line.find(' '));
 	if (pos_v == std::string::npos)
 		name = line.substr(pos + 1);
 	else{
@@ -92,13 +92,13 @@ void	Parser::parseChipsets(const std::string &line)
 
 void	Parser::parseLinks(const std::string &line)
 {
-	std::size_t	pos = line.find(' ');
+	std::size_t	pos = line.find_last_of(' ');
 	std::string	elem1;
 	std::string	elem2;
 
 	if (pos == std::string::npos)
 		throw Exception("Parser: one line doesn't contains target");
-	elem1 = line.substr(0, pos);
+	elem1 = line.substr(0, line.find(' '));
 	elem2 = line.substr(pos + 1);
 	setLink(elem1, elem2);
 }
