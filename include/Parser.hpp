@@ -18,15 +18,12 @@ class Parser
 {
 public:
 	static void	parseFile(const std::string &);
-
 	static void	checkSettings();
 private:
 	static void	parseLine(const std::string &);
 	static void	parseChipsets(const std::string &);
 	static void	parseLinks(const std::string &);
-
 	static void	setLink(const std::string &, const std::string &);
-
         static std::string	_step;
 };
 #endif

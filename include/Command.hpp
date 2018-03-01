@@ -17,7 +17,7 @@ class Command
 public:
 	Command();
 	~Command() = default;
-
+	
 private:
 	void	parseCommand(const std::string &);
 

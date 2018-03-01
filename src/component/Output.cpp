@@ -28,7 +28,7 @@ namespace nts
 	}
 
 	void	Output::setLink(std::size_t pin, nts::IComponent &other, 
-	std::size_t otherPin)
+				std::size_t otherPin)
 	{
 		if (pin != 1)
 			throw Exception("Output - " + std::to_string(pin) + 

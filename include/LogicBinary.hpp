@@ -12,12 +12,12 @@
 
 class LogicBinary
 {
-	public:
-        static nts::Tristate    binaryXor(nts::Tristate, nts::Tristate);
-        static nts::Tristate    binaryOr(nts::Tristate, nts::Tristate);
-        static nts::Tristate    binaryNor(nts::Tristate, nts::Tristate);
-        static nts::Tristate    binaryAnd(nts::Tristate, nts::Tristate);
-        static nts::Tristate    binaryNand(nts::Tristate, nts::Tristate);
+public:
+	static nts::Tristate	binaryXor(nts::Tristate, nts::Tristate);
+	static nts::Tristate	binaryOr(nts::Tristate, nts::Tristate);
+	static nts::Tristate	binaryNor(nts::Tristate, nts::Tristate);
+	static nts::Tristate	binaryAnd(nts::Tristate, nts::Tristate);
+	static nts::Tristate	binaryNand(nts::Tristate, nts::Tristate);
 };
 
 #endif /* !LOGICBINARY_HPP_ */

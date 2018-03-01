@@ -19,7 +19,8 @@ namespace nts
 	class ManagerComponent
 	{
 	public:
-		static std::unique_ptr<IComponent>	createComponent(const std::string &, const std::string &);
+		static std::unique_ptr<IComponent>	createComponent(const std::string &,
+									const std::string &);
 	private:
 		static std::unique_ptr<IComponent>	createInput(const std::string &);
 		static std::unique_ptr<IComponent>	createTrue(const std::string &);

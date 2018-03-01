@@ -20,7 +20,7 @@ namespace nts
 	{
 		if (pin != 1)
 			throw Exception("True - " + std::to_string(pin) + 
-			": not available output");
+					": not available output");
 		return (_state);
 	}
 

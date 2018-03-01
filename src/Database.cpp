@@ -8,7 +8,8 @@
 #include "Database.hpp"
 #include "Exception.hpp"
 
-std::map<std::unique_ptr<nts::IComponent>, std::tuple<Database::Type, std::string, bool, bool>>	Database::_list;
+std::map<std::unique_ptr<nts::IComponent>,
+	 std::tuple<Database::Type, std::string, bool, bool>>	Database::_list;
 
 nts::IComponent	&Database::addComponent(std::unique_ptr<nts::IComponent> comp,
 const std::string &name, const std::string &type)
@@ -17,24 +18,28 @@ const std::string &name, const std::string &type)
 	
 	for (const auto &elem : _list){
 		if (std::get<1>(elem.second) == name)
-			throw Exception("Database - " + name + ": double usage of this name");
+			throw Exception("Database - " + name +
+					": double usage of this name");
 	}
-	_list[std::move(comp)] = std::make_tuple(getType(type), name, false, 
-										type != "input" ? true : false);
+	_list[std::move(comp)] = std::make_tuple(getType(type), name, false,
+						 type != "input" ? true : false);
 	return (*pointer);
 }
 
 Database::Type	Database::getType(const std::string &type)
 {
 	if (type == "input" || type == "clock")
-		return (type == "input" ? Database::Type::INPUT : Database::Type::CLOCK);
+		return (type == "input" ? Database::Type::INPUT :
+			Database::Type::CLOCK);
 	else if (type == "output")
 		return (Database::Type::OUTPUT);
 	return (Database::Type::UNDEFINED);
 }
 
 
-std::map<std::unique_ptr<nts::IComponent>, std::tuple<Database::Type, std::string, bool, bool>>	&Database::getComponents()
+std::map<std::unique_ptr<nts::IComponent>,
+	 std::tuple<Database::Type,
+		    std::string, bool, bool>>	&Database::getComponents()
 {
 	return (_list);
 }
@@ -56,10 +61,9 @@ const std::string       &Database::getNameByComponent(const nts::IComponent &com
 			return (std::get<1>(elem.second));
 	}
 	throw Exception("Database: impossible to find name of one component");
-	
 }
 
-void    Database::isLinked(nts::IComponent &comp)
+void	Database::isLinked(nts::IComponent &comp)
 {
 	for (auto &elem : _list){
 		if (elem.first.get() == &comp){
@@ -68,7 +72,7 @@ void    Database::isLinked(nts::IComponent &comp)
 	}
 }
 
-void    Database::hasValue(nts::IComponent &comp)
+void	Database::hasValue(nts::IComponent &comp)
 {
 	for (auto &elem : _list){
 		if (elem.first.get() == &comp){

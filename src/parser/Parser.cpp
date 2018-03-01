@@ -85,7 +85,8 @@ void	Parser::parseChipsets(const std::string &line)
 	}
 	if (name == "")
 		throw Exception("Parser: name not found");
-	comp = &Database::addComponent(nts::ManagerComponent::createComponent(type, value), name, type);
+	comp = &Database::addComponent(
+		nts::ManagerComponent::createComponent(type, value), name, type);
 	if (value != "")
 		Database::hasValue(*comp);
 }

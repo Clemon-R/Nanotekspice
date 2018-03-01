@@ -7,7 +7,7 @@
 
 #include "LogicBinary.hpp"
 
-nts::Tristate   LogicBinary::binaryAnd(nts::Tristate a, nts::Tristate b)
+nts::Tristate	LogicBinary::binaryAnd(nts::Tristate a, nts::Tristate b)
 {
     if (a == nts::Tristate::UNDEFINED || b == nts::Tristate::UNDEFINED)
         return (nts::Tristate::UNDEFINED);
@@ -16,9 +16,9 @@ nts::Tristate   LogicBinary::binaryAnd(nts::Tristate a, nts::Tristate b)
     return (nts::Tristate::FALSE);
 }
 
-nts::Tristate   LogicBinary::binaryNand(nts::Tristate a, nts::Tristate b)
+nts::Tristate	LogicBinary::binaryNand(nts::Tristate a, nts::Tristate b)
 {
-    nts::Tristate   state = LogicBinary::binaryAnd(a, b);
+    nts::Tristate	state = LogicBinary::binaryAnd(a, b);
 
     if (state == nts::Tristate::TRUE)
         return (nts::Tristate::FALSE);
@@ -27,7 +27,7 @@ nts::Tristate   LogicBinary::binaryNand(nts::Tristate a, nts::Tristate b)
     return (nts::Tristate::TRUE);
 }
 
-nts::Tristate   LogicBinary::binaryOr(nts::Tristate a, nts::Tristate b)
+nts::Tristate	LogicBinary::binaryOr(nts::Tristate a, nts::Tristate b)
 {
     if (a == nts::Tristate::UNDEFINED || b == nts::Tristate::UNDEFINED)
         return (nts::Tristate::UNDEFINED);
@@ -36,9 +36,9 @@ nts::Tristate   LogicBinary::binaryOr(nts::Tristate a, nts::Tristate b)
     return (nts::Tristate::FALSE);
 }
 
-nts::Tristate   LogicBinary::binaryNor(nts::Tristate a, nts::Tristate b)
+nts::Tristate	LogicBinary::binaryNor(nts::Tristate a, nts::Tristate b)
 {
-    nts::Tristate   state = LogicBinary::binaryOr(a, b);
+    nts::Tristate	state = LogicBinary::binaryOr(a, b);
 
     if (state == nts::Tristate::TRUE)
         return (nts::Tristate::FALSE);
@@ -47,7 +47,7 @@ nts::Tristate   LogicBinary::binaryNor(nts::Tristate a, nts::Tristate b)
     return (nts::Tristate::TRUE);
 }
 
-nts::Tristate   LogicBinary::binaryXor(nts::Tristate a, nts::Tristate b)
+nts::Tristate	LogicBinary::binaryXor(nts::Tristate a, nts::Tristate b)
 {
     if (a == nts::Tristate::UNDEFINED || b == nts::Tristate::UNDEFINED)
         return (nts::Tristate::UNDEFINED);

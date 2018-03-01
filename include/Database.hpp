@@ -24,19 +24,17 @@ public:
 		OUTPUT,
 		UNDEFINED
 	};
-	static nts::IComponent	&addComponent(std::unique_ptr<nts::IComponent>, const std::string &, const std::string &);
-
+	static nts::IComponent	&addComponent(std::unique_ptr<nts::IComponent>,
+					      const std::string &,
+					      const std::string &);
 	static std::map<std::unique_ptr<nts::IComponent>, std::tuple<Type, std::string, bool, bool>>	&getComponents();
 	static nts::IComponent	&getComponentByName(const std::string &);
 	static const std::string	&getNameByComponent(const nts::IComponent &);
-
 	static void	isLinked(nts::IComponent &);
 	static void	hasValue(nts::IComponent &);
-
 	static bool	isInput(const nts::IComponent &);
 private:
 	static Database::Type	getType(const std::string &);
-	
 	static std::map<std::unique_ptr<nts::IComponent>, std::tuple<Type, std::string, bool, bool>>	_list;
 };
 
