@@ -42,7 +42,8 @@ namespace nts
 			offset = 1;
 			break;
 		default:
-			throw Exception("4069 - "+ std::to_string(pin) +": not available");
+			return (_link.find(pin) == _link.end() ? nts::Tristate::UNDEFINED :
+			std::get<0>(_link[pin])->compute(std::get<1>(_link[pin])));
 		}
 		if (_link.find(pin + offset) == _link.end())
 			return (nts::Tristate::UNDEFINED);
