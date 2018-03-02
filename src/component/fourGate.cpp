@@ -18,10 +18,13 @@ namespace nts
 	nts::Tristate	fourGate::compute(std::size_t pin)
 	{
 		int	offset = 0;
-		
-		if (pin != 3 && pin != 4 && pin != 10 && pin != 11)
+
+		if (pin < 1 || pin > 14)
 			throw Exception("FourGate - " + std::to_string(pin) + 
 					": is not a valid output");
+		else if (pin != 3 && pin != 4 && pin != 10 && pin != 11)
+			return (_link.find(pin) == _link.end() ? nts::Tristate::UNDEFINED :
+			std::get<0>(_link[pin])->compute(std::get<1>(_link[pin])));
 		offset = pin == 3 || pin == 11 ? -1 : 1;
 		if (_link.find(pin + 2 * offset) == _link.end() || 
 		_link.find(pin + offset) == _link.end())

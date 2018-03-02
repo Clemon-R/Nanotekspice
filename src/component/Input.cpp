@@ -26,7 +26,8 @@ namespace nts
 
 	void	Input::setLink(std::size_t pin, nts::IComponent &, std::size_t)
 	{
-		throw Exception("Input - " + std::to_string(pin) + ": not available");
+		if (pin != 1)
+			throw Exception("Input - " + std::to_string(pin) + ": not available");
 	}
 
 	void	Input::dump() const

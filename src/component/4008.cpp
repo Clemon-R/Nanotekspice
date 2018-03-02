@@ -56,10 +56,12 @@ namespace nts
 	}
 
 	nts::Tristate	component4008::compute(std::size_t pin)
-	{		
-		if (!(pin >= 10 && pin <= 14))
+	{
+		if (pin < 1 || pin > 16)
 			throw Exception("4008 - " + std::to_string(pin) 
 					+ ": is not a valid output");
+		else if (_link.find(pin) == _link.end())
+			return (nts::Tristate::UNDEFINED);
 		else if (pin == 14)
 			return (_cout);
 		_state = getState(pin);
@@ -69,7 +71,8 @@ namespace nts
 	void	component4008::setLink(std::size_t pin, nts::IComponent &other
 				       , std::size_t otherPin)
 	{
-		if (pin == 8 || (pin >= 10 && pin <= 13) || pin == 16)
+		if (pin == 8 || (pin >= 10 && pin <= 14) || pin == 16 
+			|| pin < 1 || pin > 16)
 			throw Exception("4008 - "+ std::to_string(pin) +": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
 		Database::isLinked(*this);

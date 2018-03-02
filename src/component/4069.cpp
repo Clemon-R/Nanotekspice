@@ -29,6 +29,7 @@ namespace nts
 	nts::Tristate	component4069::compute(std::size_t pin)
 	{
 		int	offset = 0;
+
 		switch (pin){
 		case 2:
 		case 4:
@@ -41,11 +42,10 @@ namespace nts
 			offset = 1;
 			break;
 		default:
-			throw Exception("4069 - " + std::to_string(pin)
-					+ ": is not a valid output");
+			throw Exception("4069 - "+ std::to_string(pin) +": not available");
 		}
 		if (_link.find(pin + offset) == _link.end())
-			throw Exception("4069 - " + std::to_string(pin) + ": pin not found");
+			return (nts::Tristate::UNDEFINED);
 		_state = invertState(std::get<0>(_link[pin + offset])->compute(
 					     std::get<1>(_link[pin + offset])));
 		return (_state);	
@@ -54,7 +54,7 @@ namespace nts
 	void	component4069::setLink(std::size_t pin, nts::IComponent &other
 				       , std::size_t otherPin)
 	{
-		if (pin == 8 || (pin >= 10 && pin <= 13) || pin == 16)
+		if (pin >= 1 && pin <= 13 && pin % 2 == 1)
 			throw Exception("4069 - "+ std::to_string(pin) +": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
 		Database::isLinked(*this);

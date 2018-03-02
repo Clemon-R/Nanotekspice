@@ -22,6 +22,6 @@ namespace nts
 
 		state1 = std::get<0>(comp1)->compute(std::get<1>(comp1));
 		state2 = std::get<0>(comp2)->compute(std::get<1>(comp2));
-		return (LogicBinary::binaryOr(state1, state2));
+		return (LogicBinary::binaryAnd(state1, state2));
 	}
 }
