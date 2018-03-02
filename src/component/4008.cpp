@@ -60,8 +60,9 @@ namespace nts
 		if (pin < 1 || pin > 16 || pin == 8 || pin == 16)
 			throw Exception("4008 - " + std::to_string(pin) 
 					+ ": is not a valid output");
-		else if (_link.find(pin) == _link.end())
-			return (nts::Tristate::UNDEFINED);
+		else if (!(pin >= 10 && pin <= 14))
+			return (_link.find(pin) == _link.end() ? nts::Tristate::UNDEFINED :
+			std::get<0>(_link[pin])->compute(std::get<1>(_link[pin])));
 		else if (pin == 14)
 			return (_cout);
 		_state = getState(pin);
