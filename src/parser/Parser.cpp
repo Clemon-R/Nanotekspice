@@ -116,7 +116,7 @@ void	Parser::setLink(const std::string &comp1, const std::string &comp2)
 	try{
 		first = &Database::getComponentByName(comp2.substr(0, pos2));
 		second = &Database::getComponentByName(comp1.substr(0, pos1));
-		if (Database::isInput(*second))
+		if (Database::getState(*second) < Database::getState(*first))
 			first->setLink(std::stoi(comp2.substr(pos2 + 1))
 			, *second, std::stoi(comp1.substr(pos1 + 1)));
 		else

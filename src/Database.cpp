@@ -90,3 +90,13 @@ bool	Database::isInput(const nts::IComponent &comp)
 	}
 	throw Exception("Database: component not found");
 }
+
+Database::Type	Database::getState(const nts::IComponent &comp)
+{
+	for (const auto &elem : _list){
+		if (elem.first.get() == &comp){
+			return (std::get<0>(elem.second));
+		}
+	}
+	throw Exception("Database: component not found");
+}

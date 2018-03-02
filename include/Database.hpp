@@ -21,8 +21,8 @@ public:
 	{
 		INPUT,
 		CLOCK,
-		OUTPUT,
-		UNDEFINED
+		UNDEFINED,
+		OUTPUT
 	};
 	static nts::IComponent	&addComponent(std::unique_ptr<nts::IComponent>,
 					      const std::string &,
@@ -33,6 +33,7 @@ public:
 	static void	isLinked(nts::IComponent &);
 	static void	hasValue(nts::IComponent &);
 	static bool	isInput(const nts::IComponent &);
+	static Database::Type	getState(const nts::IComponent &);
 private:
 	static Database::Type	getType(const std::string &);
 	static std::map<std::unique_ptr<nts::IComponent>, std::tuple<Type, std::string, bool, bool>>	_list;
