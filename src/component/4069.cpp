@@ -54,7 +54,7 @@ namespace nts
 	void	component4069::setLink(std::size_t pin, nts::IComponent &other
 				       , std::size_t otherPin)
 	{
-		if (pin >= 1 && pin <= 13 && pin % 2 == 1)
+		if (pin == 7 || pin >= 14 || pin < 1)
 			throw Exception("4069 - "+ std::to_string(pin) +": not available");
 		_link[pin] = std::make_tuple(&other, otherPin);
 		Database::isLinked(*this);

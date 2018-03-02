@@ -57,7 +57,7 @@ namespace nts
 
 	nts::Tristate	component4008::compute(std::size_t pin)
 	{
-		if (pin < 1 || pin > 16)
+		if (pin < 1 || pin > 16 || pin == 8 || pin == 16)
 			throw Exception("4008 - " + std::to_string(pin) 
 					+ ": is not a valid output");
 		else if (_link.find(pin) == _link.end())

@@ -19,7 +19,7 @@ namespace nts
 	{
 		int	offset = 0;
 
-		if (pin < 1 || pin > 14)
+		if (pin < 1 || pin >= 14 || pin == 7)
 			throw Exception("FourGate - " + std::to_string(pin) + 
 					": is not a valid output");
 		else if (pin != 3 && pin != 4 && pin != 10 && pin != 11)
