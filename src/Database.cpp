@@ -85,7 +85,7 @@ bool	Database::isInput(const nts::IComponent &comp)
 {
 	for (const auto &elem : _list){
 		if (elem.first.get() == &comp){
-			return (std::get<0>(elem.second) < Database::Type::OUTPUT);
+			return (std::get<0>(elem.second) != Database::Type::OUTPUT);
 		}
 	}
 	throw Exception("Database: component not found");

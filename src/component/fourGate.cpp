@@ -30,7 +30,7 @@ namespace nts
 		_link.find(pin + offset) == _link.end())
 			return (nts::Tristate::UNDEFINED);
 		_state = getState(_link[pin + 2 * offset], _link[pin + offset]);
-		return (_state);		
+		return (_state);
 	}
 
 	void	fourGate::setLink(std::size_t pin, nts::IComponent &other, 
