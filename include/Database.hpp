@@ -32,7 +32,6 @@ public:
 	static const std::string	&getNameByComponent(const nts::IComponent &);
 	static void	isLinked(nts::IComponent &);
 	static void	hasValue(nts::IComponent &);
-	static bool	isInput(const nts::IComponent &);
 	static Database::Type	getState(const nts::IComponent &);
 private:
 	static Database::Type	getType(const std::string &);
