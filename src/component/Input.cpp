@@ -12,8 +12,10 @@
 
 namespace nts
 {
-	Input::Input(nts::Tristate state) : _state(state)
+	Input::Input(nts::Tristate state) : Component()
 	{
+		_state = state;
+		_pins[1] = std::make_tuple(nts::PinType::OUTPUT, nullptr, 0);
 	}
 	
 	nts::Tristate	Input::compute(std::size_t pin)
@@ -22,24 +24,6 @@ namespace nts
 			throw Exception("Input - " + std::to_string(pin) + 
 					": not available output");
 		return (_state);
-	}
-
-	void	Input::setLink(std::size_t pin, nts::IComponent &, std::size_t)
-	{
-		if (pin != 1)
-			throw Exception("Input - " + std::to_string(pin) + ": not available");
-	}
-
-	void	Input::dump() const
-	{
-		std::cout << Database::getNameByComponent(*this);
-		if (_state == nts::Tristate::TRUE)
-			std::cout << "=1";
-		else if (_state == nts::Tristate::FALSE)
-			std::cout << "=0";
-		else
-			std::cout << "=U";
-		std::cout << std::endl;		
 	}
 
 	void	Input::setValue(nts::Tristate state)

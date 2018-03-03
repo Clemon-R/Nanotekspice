@@ -17,7 +17,7 @@ namespace nts
     public:
         component4030();
     private:
-		Tristate	getState(std::tuple<IComponent *, std::size_t>, std::tuple<IComponent *, std::size_t>) override;
+		Tristate	getState(nts::Tristate, nts::Tristate) override;
     };
 }
 

@@ -8,20 +8,16 @@
 #ifndef INPUT_HPP_
 # define INPUT_HPP_
 
-# include "IComponent.hpp"
+# include "Component.hpp"
 
 namespace nts
 {
-	class Input : public IComponent
+	class Input : public Component
 	{
 	public:
 		Input(nts::Tristate);
 		nts::Tristate	compute(std::size_t) override;
-		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
-		void	dump() const override;
 		void	setValue(nts::Tristate);
-	protected:
-		nts::Tristate	_state;
 	};
 }
 #endif

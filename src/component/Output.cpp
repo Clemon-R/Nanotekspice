@@ -12,8 +12,10 @@
 
 namespace nts
 {
-	Output::Output(nts::Tristate state) : _state(state), _set(false)
+	Output::Output(nts::Tristate state) : Component(), _set(false)
 	{
+		_state = state;
+		_pins[1] = std::make_tuple(nts::PinType::INPUT, nullptr, 0);
 	}
 	
 	nts::Tristate	Output::compute(std::size_t pin)
@@ -21,33 +23,9 @@ namespace nts
 		if (pin != 1)
 			throw Exception("Output - " + std::to_string(pin) + 
 			": not output available");
-		else if (!_set)
+		else if (std::get<1>(_pins[1]) == nullptr)
 			return (nts::Tristate::UNDEFINED);
-		_state = std::get<0>(_link)->compute(std::get<1>(_link));
+		_state = std::get<1>(_pins[pin])->compute(std::get<2>(_pins[pin]));
 		return (_state);
-	}
-
-	void	Output::setLink(std::size_t pin, nts::IComponent &other, 
-				std::size_t otherPin)
-	{
-		if (pin != 1)
-			throw Exception("Output - " + std::to_string(pin) + 
-			": not available");
-		_link = std::make_tuple(&other, otherPin);
-		Database::isLinked(*this);
-		Database::isLinked(other);
-		_set = true;
-	}
-
-	void	Output::dump() const
-	{
-		std::cout << Database::getNameByComponent(*this);
-		if (_state == nts::Tristate::TRUE)
-			std::cout << "=1";
-		else if (_state == nts::Tristate::FALSE)
-			std::cout << "=0";
-		else
-			std::cout << "=U";
-		std::cout << std::endl;
 	}
 }

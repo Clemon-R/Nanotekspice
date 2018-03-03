@@ -6,6 +6,8 @@
 ##
 
 SRC_CPP	=	$(addprefix src/,	\
+		ManagerComponent.cpp	\
+		Component.cpp	\
 		Exception.cpp	\
 		Database.cpp	\
 		Command.cpp	\
@@ -14,7 +16,6 @@ SRC_CPP	=	$(addprefix src/,	\
 		)
 
 SRC_CPP	+=	$(addprefix src/component/,	\
-		ManagerComponent.cpp	\
 		fourGate.cpp	\
 		Input.cpp	\
 		True.cpp	\
@@ -39,6 +40,7 @@ SRC_HPP	=	$(addprefix include/,	\
 		IComponent.hpp	\
 		ManagerComponent.hpp	\
 		Exception.hpp		\
+		Component.hpp	\
 		Database.hpp		\
 		Parser.hpp		\
 		Parameter.hpp		\

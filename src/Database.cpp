@@ -6,6 +6,7 @@
 //
 
 #include "Database.hpp"
+#include "Component.hpp"
 #include "Exception.hpp"
 
 std::map<std::unique_ptr<nts::IComponent>,
@@ -21,6 +22,7 @@ const std::string &name, const std::string &type)
 			throw Exception("Database - " + name +
 					": double usage of this name");
 	}
+	(static_cast<nts::Component *>(pointer))->setName(name);
 	_list[std::move(comp)] = std::make_tuple(getType(type), name, false,
 						 type != "input" ? true : false);
 	return (*pointer);
@@ -44,11 +46,11 @@ std::map<std::unique_ptr<nts::IComponent>,
 	return (_list);
 }
 
-nts::IComponent	&Database::getComponentByName(const std::string &name)
+nts::Component	*Database::getComponentByName(const std::string &name)
 {
 	for (const auto &elem : _list){
 		if (std::get<1>(elem.second) == name){
-			return (*elem.first);
+			return (static_cast<nts::Component *>(elem.first.get()));
 		}
 	}
 	throw Exception("Database - " + name + ": component not found");

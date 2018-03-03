@@ -8,25 +8,19 @@
 #ifndef FOURGATE_HPP_
 # define FOURGATE_HPP_
 
-# include "IComponent.hpp"
+# include "Component.hpp"
 # include "LogicBinary.hpp"
 # include <map>
 
 namespace nts
 {
-    class fourGate : public IComponent
+    class fourGate : public Component
     {
     public:
 		fourGate(nts::Tristate);
 		nts::Tristate	compute(std::size_t) override;
-		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
-		void	dump() const override;
 	protected:
-		virtual Tristate	getState(std::tuple<IComponent *, std::size_t>, 
-		std::tuple<IComponent *, std::size_t>) = 0;
-
-		std::map<std::size_t, std::tuple<IComponent *, std::size_t>>	_link;
-		nts::Tristate	_state;
+		virtual Tristate	getState(nts::Tristate, nts::Tristate) = 0;
     };
 }
 

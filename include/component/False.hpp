@@ -8,19 +8,15 @@
 #ifndef FALSE_HPP_
 # define FALSE_HPP_
 
-# include "IComponent.hpp"
+# include "Component.hpp"
 
 namespace nts
 {
-	class False : public IComponent
+	class False : public Component
 	{
 	public:
 		False();
 		nts::Tristate	compute(std::size_t) override;
-		void	setLink(std::size_t, nts::IComponent &, std::size_t) override;
-		void	dump() const override;
-	private:
-		nts::Tristate	_state;
 	};
 }
 #endif
