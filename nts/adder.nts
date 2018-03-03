@@ -1,15 +1,15 @@
 # Admiral Business Machines 1954-2042 
 # 4 bits adder 
 .chipsets:
-input									 		 a0
-input	a1
-input	a2
-input	a3
-input	b0
-input	b1
-input	b2
-input	b3
-input	cin
+input									 		 a0(1)
+input	a1(1)
+input	a2(0)
+input	a3(0)
+input	b0(1)
+input	b1(0)
+input	b2(1)
+input	b3(0)
+input	cin(1)
 output	o0
 output	o1
 output	o2

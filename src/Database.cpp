@@ -56,15 +56,6 @@ nts::Component	*Database::getComponentByName(const std::string &name)
 	throw Exception("Database - " + name + ": component not found");
 }
 
-const std::string       &Database::getNameByComponent(const nts::IComponent &comp)
-{
-	for (const auto &elem : _list){
-		if (elem.first.get() == &comp)
-			return (std::get<1>(elem.second));
-	}
-	throw Exception("Database: impossible to find name of one component");
-}
-
 void	Database::isLinked(nts::IComponent &comp)
 {
 	for (auto &elem : _list){
