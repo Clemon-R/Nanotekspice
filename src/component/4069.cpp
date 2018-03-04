@@ -40,14 +40,13 @@ namespace nts
 		if (_pins.find(pin) == _pins.end())
 			throw Exception("4069 - "+ std::to_string(pin) +": not available");
 		else if (pin % 2 == 1)
-			return (std::get<1>(_pins[pin]) == nullptr ? nts::Tristate::UNDEFINED :
-			std::get<1>(_pins[pin])->compute(std::get<2>(_pins[pin])));
+			return (std::get<1>(_pins[pin]) == nullptr ?
+			nts::Tristate::UNDEFINED : computeState(pin));
 		offset = pin == 2 || pin == 4 || pin == 6 ? -1 : 1;
 		if (std::get<0>(_pins[pin]) == nts::PinType::INPUT &&
 			std::get<1>(_pins[pin]) == nullptr)
 			return (nts::Tristate::UNDEFINED);
-		_state = invertState(std::get<1>(_pins[pin + offset])->compute(
-					     std::get<2>(_pins[pin + offset])));
+		_state = invertState(computeState(pin + offset));
 		return (_state);	
 	}
 }

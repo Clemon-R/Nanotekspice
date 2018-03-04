@@ -42,8 +42,8 @@ namespace nts
 			(std::get<0>(_pins[pin + offset]) == nts::PinType::INPUT &&
 				std::get<1>(_pins[pin + offset]) == nullptr))
 			return (nts::Tristate::UNDEFINED);
-		state1 = std::get<1>(_pins[pin + 2 * offset])->compute(std::get<2>(_pins[pin + 2 * offset]));
-		state2 = std::get<1>(_pins[pin + offset])->compute(std::get<2>(_pins[pin + offset]));
+		state1 = computeState(pin + offset * 2);
+		state2 = computeState(pin + offset);
 		_state = getState(state1, state2);
 		return (_state);
 	}

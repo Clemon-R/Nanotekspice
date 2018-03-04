@@ -53,4 +53,9 @@ namespace nts
 	{
 		return (std::get<0>(_pins[pin]));
 	}
+
+	nts::Tristate	Component::computeState(std::size_t pin)
+	{
+		return (std::get<1>(_pins[pin])->compute(std::get<2>(_pins[pin])));
+	}
 }

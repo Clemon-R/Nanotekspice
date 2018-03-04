@@ -30,6 +30,7 @@ namespace nts{
         void    setName(const std::string &name);
         const std::string   &getName() const;
         nts::PinType    getType(std::size_t);
+        nts::Tristate   computeState(std::size_t pin);
     protected:
         std::string _name;
         nts::Tristate   _state;

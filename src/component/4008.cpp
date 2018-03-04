@@ -70,8 +70,8 @@ namespace nts
 			throw Exception("4008 - " + std::to_string(pin) 
 					+ ": is not a valid output");
 		else if (std::get<0>(_pins[pin]) != nts::PinType::OUTPUT)
-			return (std::get<1>(_pins[pin]) == nullptr ? nts::Tristate::UNDEFINED
-			: std::get<1>(_pins[pin])->compute(std::get<2>(_pins[pin])));
+			return (std::get<1>(_pins[pin]) == nullptr ?
+			nts::Tristate::UNDEFINED : computeState(pin));
 		else if (pin == 14)
 			return (_cout);
 		_state = getState(pin);
