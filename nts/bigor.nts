@@ -1,0 +1,20 @@
+##test
+.chipsets:
+input a(1)
+input b(0)
+input c(1)
+input d(0)
+input e(1)
+4001  or
+output out
+
+.links:
+a:1	or:1
+or:2	b:1
+or:3	or:5
+or:6	c:1
+or:8 or:4
+or:9 d:1
+or:12 or:10
+or:13 e:1
+or:11 out:1

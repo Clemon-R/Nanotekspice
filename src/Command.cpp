@@ -38,6 +38,8 @@ void	Command::parseCommand(const std::string &command)
 {
 	std::map<std::string, std::function<void ()>>	commands;
 
+	if (command.length() == 0)
+		return;
 	commands["exit"] = std::bind(&Command::exit, this);
 	commands["display"] = std::bind(&Command::display, this);
 	commands["dump"] = std::bind(&Command::dump, this);
