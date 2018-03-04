@@ -28,11 +28,9 @@ namespace nts
 	
 	nts::Tristate   component4069::invertState(nts::Tristate state) const
 	{
-		if (state == nts::Tristate::TRUE)
-			return (nts::Tristate::FALSE);
-		else if (state == nts::Tristate::FALSE)
-			return (nts::Tristate::TRUE);
-		return (nts::Tristate::UNDEFINED);
+		if (state == nts::Tristate::UNDEFINED)
+			return (state);
+		return (static_cast<nts::Tristate>(!static_cast<char>(state)));
 	}
 	
 	nts::Tristate	component4069::compute(std::size_t pin)
@@ -45,7 +43,8 @@ namespace nts
 			return (std::get<1>(_pins[pin]) == nullptr ? nts::Tristate::UNDEFINED :
 			std::get<1>(_pins[pin])->compute(std::get<2>(_pins[pin])));
 		offset = pin == 2 || pin == 4 || pin == 6 ? -1 : 1;
-		if (std::get<1>(_pins[pin]) == nullptr)
+		if (std::get<0>(_pins[pin]) == nts::PinType::INPUT &&
+			std::get<1>(_pins[pin]) == nullptr)
 			return (nts::Tristate::UNDEFINED);
 		_state = invertState(std::get<1>(_pins[pin + offset])->compute(
 					     std::get<2>(_pins[pin + offset])));

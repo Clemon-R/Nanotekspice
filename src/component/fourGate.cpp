@@ -36,9 +36,11 @@ namespace nts
 		else if (std::get<0>(_pins[pin]) != nts::PinType::OUTPUT)
 			return (std::get<1>(_pins[pin]) == nullptr ? nts::Tristate::UNDEFINED :
 			std::get<1>(_pins[pin])->compute(std::get<2>(_pins[pin])));
-		offset = pin == 3 || pin == 11 ? -1 : 1;
-		if (std::get<1>(_pins[pin + offset * 2]) == nullptr || 
-			std::get<1>(_pins[pin + offset]) == nullptr)
+		offset = pin == 3 || pin == 10 ? -1 : 1;
+		if ((std::get<0>(_pins[pin + offset * 2]) == nts::PinType::INPUT && 
+				std::get<1>(_pins[pin + offset * 2]) == nullptr) || 
+			(std::get<0>(_pins[pin + offset]) == nts::PinType::INPUT &&
+				std::get<1>(_pins[pin + offset]) == nullptr))
 			return (nts::Tristate::UNDEFINED);
 		state1 = std::get<1>(_pins[pin + 2 * offset])->compute(std::get<2>(_pins[pin + 2 * offset]));
 		state2 = std::get<1>(_pins[pin + offset])->compute(std::get<2>(_pins[pin + offset]));

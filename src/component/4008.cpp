@@ -51,8 +51,10 @@ namespace nts
 		for (std::size_t i = 0;i <= pin - 10;i += 1){
 			ia = i == 3 ? 1 : 7 - i * 2;
 			ib = i == 3 ? 15 : 7 - i * 2 - 1;
-			if (std::get<1>(_pins[ia]) == nullptr || 
-			    std::get<1>(_pins[ib]) == nullptr)
+			if ((std::get<0>(_pins[ia]) == nts::PinType::INPUT &&
+				std::get<1>(_pins[ia]) == nullptr) || 
+			    (std::get<0>(_pins[ib]) == nts::PinType::INPUT &&
+				std::get<1>(_pins[ib]) == nullptr))
 				return (nts::Tristate::UNDEFINED);
 			a = std::get<1>(_pins[ia])->compute(std::get<2>(_pins[ia]));
 			b = std::get<1>(_pins[ib])->compute(std::get<2>(_pins[ib]));
